@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Standard Nutrition | Executive Business Case</title>
+<style>
+  @page { size: letter portrait; margin: 0; }
+  @media print {
+    html, body { background: #fff !important; margin: 0 !important; padding: 0 !important; width: 8.5in !important; }
+    .page { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; page-break-after: always; break-after: page; }
+    .page:last-child { page-break-after: avoid; break-after: avoid; }
+    .avoid-break { break-inside: avoid; page-break-inside: avoid; }
+  }
+
+  :root {
+    --green-900: #174737;
+    --green-800: #215944;
+    --green-700: #2e775c;
+    --green-100: #eef7f2;
+    --green-150: #e4f1ea;
+    --green-200: #d3e7da;
+    --green-300: #b7d5c4;
+    --blue-900: #23465d;
+    --blue-100: #edf4f8;
+    --blue-150: #e2eef5;
+    --gold-900: #7b5a17;
+    --gold-100: #fdf7ea;
+    --gold-150: #f7efd9;
+    --ink-900: #19252d;
+    --ink-700: #354652;
+    --ink-500: #63737f;
+    --ink-300: #cfd9df;
+    --ink-200: #e4ebef;
+    --ink-100: #f5f8fa;
+    --white: #fff;
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 10px 26px rgba(25, 37, 45, 0.08);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 26px 0;
+    background: #dfe5e8;
+    color: var(--ink-700);
+    font-family: "Segoe UI", Inter, Arial, sans-serif;
+    line-height: 1.48;
+  }
+
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto 24px auto;
+    padding: 0.44in 0.56in 0.6in 0.56in;
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(25, 37, 45, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--green-900);
+    margin-bottom: 12px;
+  }
+
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-pill {
+    background: var(--green-900);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 5px 10px;
+  }
+  .brand-tag, .page-num {
+    font-size: 11px;
+    color: var(--ink-500);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .footer {
+    position: absolute;
+    left: 0.56in;
+    right: 0.56in;
+    bottom: 0.26in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--ink-300);
+    padding-top: 6px;
+    font-size: 10px;
+    color: var(--ink-500);
+  }
+  .footer strong { color: var(--green-900); }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 14px;
+    border: 1px solid #103628;
+    background: linear-gradient(135deg, #174737 0%, #0f3428 100%);
+    border-radius: var(--radius-lg);
+    padding: 15px 16px;
+    margin-bottom: 14px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #bfe2cd;
+    margin-bottom: 5px;
+  }
+  h1 {
+    margin: 0 0 6px 0;
+    font-size: 24px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+  .hero p {
+    margin: 0;
+    font-size: 13.2px;
+    color: rgba(255,255,255,0.94);
+  }
+  .hero-note {
+    background: linear-gradient(180deg, #f6f9f7 0%, #eaf2ee 100%);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: var(--radius-md);
+    padding: 11px 12px;
+    box-shadow: 0 3px 10px rgba(7, 23, 18, 0.10);
+  }
+  .hero-note h3 {
+    margin: 0 0 5px 0;
+    font-size: 13px;
+    color: var(--green-900);
+    font-weight: 800;
+  }
+  .hero-note p {
+    font-size: 12px;
+    line-height: 1.45;
+    color: #2d4049;
+  }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .metric {
+    background: linear-gradient(180deg, #fbfcfd 0%, #f1f6f9 100%);
+    border: 1px solid #d8e3ea;
+    border-radius: var(--radius-md);
+    padding: 12px 12px 11px 12px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
+  }
+  .metric.primary {
+    border: 1px solid #d8e3ea;
+    background: #ffffff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 1px 2px rgba(25,37,45,0.04);
+  }
+  .metric::before {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 4px;
+    border-radius: 999px;
+    background: #6d8fa5;
+    margin-bottom: 10px;
+  }
+  .metric.primary::before { background: #6d8fa5; }
+  .metric .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #4d6270;
+    font-weight: 800;
+    margin-bottom: 7px;
+  }
+  .metric .value {
+    font-size: 24px;
+    line-height: 1.04;
+    color: var(--blue-900);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+  }
+  .metric.primary .value { color: var(--blue-900); }
+  .metric p {
+    margin: 0;
+    font-size: 11.4px;
+    color: #31434e;
+    line-height: 1.38;
+  }
+
+  .top-line {
+    background: linear-gradient(180deg, #174737 0%, #113629 100%);
+    color: var(--white);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 1.48;
+  }
+  .top-line strong { color: #bfe2cd; }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 7px 0;
+  }
+  .section-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: var(--green-900);
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 21px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    color: var(--green-900);
+  }
+  .subhead {
+    margin: -1px 0 9px 30px;
+    font-size: 12.6px;
+    color: var(--ink-500);
+  }
+
+  .bullet-box {
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .bullet-box ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .bullet-box li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 7px;
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+  .bullet-box li:last-child { margin-bottom: 0; }
+  .bullet-box li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--green-700);
+    font-weight: 900;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 0.9fr 0.8fr 1.3fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .panel {
+    border: 1px solid var(--ink-200);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    padding: 12px 13px;
+  }
+  .panel h3 {
+    margin: 0 0 7px 0;
+    font-size: 14px;
+    color: var(--ink-900);
+    font-weight: 800;
+  }
+  .panel p, .panel li {
+    font-size: 12.4px;
+    line-height: 1.42;
+    margin: 0;
+    color: var(--ink-700);
+  }
+  .panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .panel li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 6px;
+  }
+  .panel li:last-child { margin-bottom: 0; }
+  .panel li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--green-700);
+    font-weight: 900;
+  }
+
+  .value-table {
+    border: 1px solid var(--ink-200);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.65);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  thead th {
+    background: linear-gradient(180deg, #eff4f7 0%, #e7eef3 100%);
+    color: var(--ink-700);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: left;
+    font-weight: 800;
+    padding: 10px 11px;
+    border-bottom: 1px solid var(--ink-200);
+  }
+  tbody td {
+    padding: 10px 11px;
+    border-bottom: 1px solid var(--ink-200);
+    vertical-align: top;
+    font-size: 12.4px;
+    line-height: 1.42;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:nth-child(even) td { background: #fbfcfd; }
+  td.money {
+    white-space: nowrap;
+    font-weight: 800;
+    color: var(--green-900);
+  }
+  td strong { color: var(--ink-900); }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 0.95fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .callout {
+    border-radius: var(--radius-md);
+    padding: 12px 13px;
+    border: 1px solid var(--green-200);
+    background: linear-gradient(180deg, #eef6f1 0%, #e3efe8 100%);
+  }
+  .callout.alt {
+    border-color: #e6dcc1;
+    background: linear-gradient(180deg, #fbf5e7 0%, #f4ecd8 100%);
+  }
+  .callout h3 {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    color: var(--ink-900);
+    font-weight: 800;
+  }
+  .callout p, .callout li {
+    margin: 0;
+    font-size: 12.3px;
+    line-height: 1.45;
+  }
+  .callout ul { list-style: none; padding: 0; margin: 0; }
+  .callout li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 6px;
+  }
+  .callout li:last-child { margin-bottom: 0; }
+  .callout li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--green-700);
+    font-weight: 900;
+  }
+
+  .context-box {
+    background: linear-gradient(180deg, #eef4f7 0%, #e4edf3 100%);
+    border: 1px solid #d6e2ea;
+    border-radius: var(--radius-md);
+    padding: 12px 13px;
+    margin-bottom: 12px;
+  }
+  .context-box h3 {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    color: var(--blue-900);
+    font-weight: 800;
+  }
+  .context-box p {
+    margin: 0;
+    font-size: 12.4px;
+    line-height: 1.45;
+  }
+
+  .decision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .decision-card {
+    border-radius: var(--radius-md);
+    padding: 13px;
+    border: 1px solid var(--ink-200);
+    background: var(--white);
+  }
+  .decision-card.recommended {
+    border: 1.5px solid var(--green-300);
+    background: var(--green-100);
+  }
+  .tag {
+    display: inline-block;
+    margin-bottom: 7px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 800;
+    color: var(--green-900);
+    background: var(--green-200);
+    border-radius: 999px;
+    padding: 4px 8px;
+  }
+  .decision-card h3 {
+    margin: 0 0 7px 0;
+    font-size: 16px;
+    color: var(--ink-900);
+    font-weight: 800;
+  }
+  .decision-card p, .decision-card li {
+    font-size: 12.4px;
+    line-height: 1.45;
+    color: var(--ink-700);
+  }
+  .decision-card p { margin: 0 0 7px 0; }
+  .decision-card ul { margin: 0; padding: 0; list-style: none; }
+  .decision-card li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 6px;
+  }
+  .decision-card li:last-child { margin-bottom: 0; }
+  .decision-card li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--green-700);
+    font-weight: 900;
+  }
+
+  .bottom-line {
+    background: linear-gradient(180deg, #183f31 0%, #123327 100%);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 15px 17px;
+  }
+  .bottom-line .small {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #a8d8bc;
+    font-weight: 800;
+    margin-bottom: 5px;
+  }
+  .bottom-line h2 {
+    margin: 0 0 6px 0;
+    font-size: 21px;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
+  .bottom-line p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.52;
+    color: rgba(255,255,255,0.93);
+  }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .metric .value { font-size: 22px; }
+  .benchmark-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+    margin-bottom: 12px;
+  }
+  .benchmark {
+    background: linear-gradient(180deg, #f4f8fa 0%, #ebf1f4 100%);
+    border: 1px solid var(--ink-200);
+    border-radius: var(--radius-md);
+    padding: 10px 11px;
+    border-top: 4px solid #8db39d;
+  }
+  .benchmark .value {
+    display:block;
+    font-size: 17px;
+    line-height: 1.05;
+    font-weight: 800;
+    color: var(--blue-900);
+    letter-spacing: -0.02em;
+    margin-bottom: 2px;
+  }
+  .benchmark .label {
+    display:block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #587083;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .benchmark p { margin: 0; font-size: 11px; line-height: 1.35; color: #31434e; }
+  .intro-box {
+    background: linear-gradient(180deg, #f0f7f3 0%, #e6f1ea 100%);
+    border: 1px solid var(--green-300);
+    border-radius: var(--radius-md);
+    padding: 12px 13px;
+    margin-bottom: 10px;
+  }
+  .intro-box p { margin:0; font-size: 12.6px; line-height: 1.48; }
+  .two-col {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:12px;
+    margin-bottom: 12px;
+  }
+  .tight-box {
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+    border: 1px solid var(--ink-200);
+    border-radius: var(--radius-md);
+    padding: 12px 13px;
+  }
+  .tight-box h3 { margin:0 0 7px 0; font-size:14px; color: var(--ink-900); font-weight: 800; }
+  .tight-box ul { list-style:none; padding:0; margin:0; }
+  .tight-box li { position:relative; padding-left:14px; margin-bottom:6px; font-size:12.4px; line-height:1.42; }
+  .tight-box li:last-child { margin-bottom:0; }
+  .tight-box li::before { content:"•"; position:absolute; left:0; color: var(--green-700); font-weight:900; }
+  .single-card {
+    border-radius: var(--radius-md);
+    padding: 14px;
+    border: 1.5px solid var(--green-300);
+    background: linear-gradient(180deg, #eef7f2 0%, #e2efe8 100%);
+    margin-bottom: 12px;
+  }
+  .single-card h3 { margin:0 0 7px 0; font-size: 16px; color: var(--green-900); font-weight: 800; }
+  .single-card p, .single-card li { font-size: 12.5px; line-height: 1.45; margin:0; }
+  .single-card ul { list-style:none; padding:0; margin:9px 0 0 0; }
+  .single-card li { position:relative; padding-left:14px; margin-bottom:6px; }
+  .single-card li:last-child { margin-bottom:0; }
+  .single-card li::before { content:"•"; position:absolute; left:0; color: var(--green-700); font-weight:900; }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-pill">Vena</span>
+      <span class="brand-tag">Standard Nutrition executive business case</span>
+    </div>
+    <span class="page-num">Page 1 of 3</span>
+  </div>
+
+  <section class="hero avoid-break">
+    <div>
+      <div class="eyebrow">Feed business budgeting, reporting, and scenario support</div>
+      <h1>Why this makes sense to consider now</h1>
+      <p>This is about giving you a better way to manage budgeting, reporting, and decision support for the feed business, with more confidence in the numbers and faster answers for the operating companies.</p>
+    </div>
+    <div class="hero-note">
+      <h3>What this is really about</h3>
+      <p>This is less about saving finance time and more about helping you improve budget accuracy, tighten drilldown, and support the business faster when questions come up around hiring, growth, margin, and spend.</p>
+    </div>
+  </section>
+
+  <section class="metric-grid avoid-break">
+    <div class="metric primary">
+      <div class="label">Annual software fee</div>
+      <div class="value">$36,300</div>
+      <p>15 core budget owners and reporting in one system from the start</p>
+    </div>
+    <div class="metric">
+      <div class="label">Direct annual value</div>
+      <div class="value">$53.9K</div>
+      <p>Time saved across finance, budget owners, payroll support, and reduced outside BI spend</p>
+    </div>
+    <div class="metric">
+      <div class="label">Base-case annual value</div>
+      <div class="value">$143.9K</div>
+      <p>Direct value plus faster and better operating decisions</p>
+    </div>
+    <div class="metric">
+      <div class="label">Base-case payback</div>
+      <div class="value">3.0 mo</div>
+      <p>Based on the $36,300 annual software fee</p>
+    </div>
+    <div class="metric">
+      <div class="label">Value multiple</div>
+      <div class="value">4.0x</div>
+      <p>Base-case annual value versus annual fee</p>
+    </div>
+    <div class="metric">
+      <div class="label">Estimated annual hours saved</div>
+      <div class="value">600+</div>
+      <p>Across budget owners, finance, and payroll support</p>
+    </div>
+  </section>
+
+  <section class="benchmark-grid avoid-break">
+    <div class="benchmark">
+      <span class="label">Budgeting benchmark</span>
+      <span class="value">50% faster</span>
+      <p>Vena customers like Schuh and Cumming cut budgeting cycle time materially.</p>
+    </div>
+    <div class="benchmark">
+      <span class="label">Reporting benchmark</span>
+      <span class="value">66% faster</span>
+      <p>Lookout reported materially faster reporting with Vena.</p>
+    </div>
+    <div class="benchmark">
+      <span class="label">Planning turnaround</span>
+      <span class="value">6 wks → 10 days</span>
+      <p>iPSL cut budget and forecast report turnaround dramatically.</p>
+    </div>
+    <div class="benchmark">
+      <span class="label">ROI example</span>
+      <span class="value">255% in 6 mo</span>
+      <p>Cumming reported a strong early return after rollout.</p>
+    </div>
+  </section>
+
+  <div class="top-line avoid-break">
+    <strong>Bottom line:</strong> on this version of the rollout, the direct savings alone already make the spend reasonable. The bigger return comes from faster answers, better operating decisions, and catching issues earlier when points, mix, margin, or spend start moving the wrong way.
+  </div>
+
+  <div class="section-head"><span class="section-num">1</span><span class="section-title">What Vena would do for you</span></div>
+  <div class="intro-box avoid-break">
+    <p>Vena is a budgeting, reporting, and analysis platform that keeps the Excel experience your team already knows, but replaces the broken links, static files, and manual follow-up with one controlled model. It pulls your actuals and driver data into one place, gives your budget owners a cleaner way to work, and helps you get to reports, drilldown, and scenario answers much faster.</p>
+  </div>
+
+  <div class="two-col avoid-break">
+    <div class="tight-box">
+      <h3>What is getting in the way today</h3>
+      <ul>
+        <li>The feed-side budget cycle still takes about two months and runs through linked spreadsheets and manual checks.</li>
+        <li>Expense budgeting is still one of the most manual parts of the process.</li>
+        <li>Some operating-company questions can still take up to two weeks to answer accurately.</li>
+        <li>You said accuracy is the key approval metric, and the current process makes that harder than it should be.</li>
+      </ul>
+    </div>
+    <div class="tight-box">
+      <h3>What changes with Vena</h3>
+      <ul>
+        <li>Your 15 core budget owners work in one system instead of across fragile linked files.</li>
+        <li>Finance gets one place to manage budgeting, reporting, drilldown, and supporting detail.</li>
+        <li>You can compare budget to actual faster and get to the story behind the number more quickly.</li>
+        <li>Scenario work around hiring, regional growth, margin, and spending becomes easier to turn around.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="context-box avoid-break">
+    <h3>One relevant example</h3>
+    <p>You shared a case where one region was budgeted to deliver about <strong>$0.90 to the bottom line per point</strong>, but actual results came in closer to <strong>$0.35 per point</strong>. You could point to a few likely reasons, but you could not show the full story cleanly in the data. That is exactly the gap this case is trying to close.</p>
+  </div>
+
+  <div class="callout alt avoid-break">
+    <h3>If nothing changes</h3>
+    <p>The likely outcome is another budget cycle built on the same linked files, the same manual follow-up, and the same slow turnaround when operating-company leaders ask what changed, where margin moved, or what a hiring or expansion decision would mean. That keeps finance reacting after the fact when the business really needs faster, clearer answers.</p>
+  </div>
+
+  <div class="footer"><strong>Vena Solutions</strong><span>Standard Nutrition executive business case · 2026</span></div>
+</div>
+
+<div class="page">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-pill">Vena</span>
+      <span class="brand-tag">Standard Nutrition executive business case</span>
+    </div>
+    <span class="page-num">Page 2 of 3</span>
+  </div>
+
+  <div class="section-head"><span class="section-num">2</span><span class="section-title">How the numbers work</span></div>
+  <div class="subhead">Three practical sources of value, all tied back to how the team works today.</div>
+
+  <div class="value-table avoid-break">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 15%;">Value source</th>
+          <th style="width: 12%;">Annual value</th>
+          <th style="width: 31%;">What changes</th>
+          <th style="width: 42%;">Why this is a reasonable assumption</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Direct savings</strong></td>
+          <td class="money">$53,900</td>
+          <td>Less time fixing files, chasing inputs, pulling GL detail, rebuilding reports, and working through manual budget support.</td>
+          <td>Includes time savings across 15 budget owners, finance, and payroll support, plus the roughly $20,000 you said is currently tied up in Power BI support.</td>
+        </tr>
+        <tr>
+          <td><strong>Better and faster decisions</strong></td>
+          <td class="money">$90,000</td>
+          <td>Faster answers on hiring, regional growth, spending questions, and operating-company performance.</td>
+          <td>Assumes only 6 meaningful operating decisions per year at $15,000 each. You already said faster answers here would be an easy ROI story.</td>
+        </tr>
+        <tr>
+          <td><strong>Forecast and margin impact</strong></td>
+          <td class="money">$125,000</td>
+          <td>Finance can catch issues sooner when points, mix, margin, tons, production, or spending start drifting away from plan.</td>
+          <td>Uses only a 0.25% effect on a $50M revenue base. For a business your size, that is still a conservative way to model the upside.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="split avoid-break">
+    <div class="callout">
+      <h3>What is in the direct savings number</h3>
+      <ul>
+        <li>About 180 hours across the 15 core budget owners from less rework, fewer file issues, and less time chasing numbers</li>
+        <li>About 200 hours from Kelsie’s budget prep, GL-detail pulls, and follow-up work</li>
+        <li>About 140 hours from your reporting, drilldown, and follow-up analysis time</li>
+        <li>About 80 hours from payroll and support work tied to the budget process</li>
+        <li>About $20,000 from the current outside Power BI spend</li>
+      </ul>
+    </div>
+    <div class="callout alt">
+      <h3>What that means on its own</h3>
+      <p>Even if Standard Nutrition only captured the direct savings, the annual fee would still pay back in about <strong>8.1 months</strong>. And that still comes with better visibility, cleaner drilldown, more control over the budgeting process, and a stronger base for faster reporting and better decisions. In other words, the software can stand on its own before putting any value on the broader upside.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><span class="section-num">3</span><span class="section-title">How the forecast and margin impact shows up</span></div>
+  <div class="bullet-box avoid-break">
+    <ul>
+      <li>This is not saying the software creates margin on its own.</li>
+      <li>It means you can spot problems sooner and help the business react faster when points, product mix, pricing, regional performance, freight, mill costs, or spending start moving away from plan.</li>
+      <li>To keep the math easy to follow, this section uses three small percentage assumptions: <strong>0.25%</strong>, <strong>0.35%</strong>, and <strong>0.50%</strong>.</li>
+      <li>In a points-driven business, even a small improvement in how quickly the team catches and corrects those issues can be worth real money.</li>
+    </ul>
+  </div>
+
+  <div class="value-table avoid-break">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 28%;">Revenue base</th>
+          <th style="width: 24%;">0.25%</th>
+          <th style="width: 24%;">0.35%</th>
+          <th style="width: 24%;">0.50%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>$50,000,000</strong></td>
+          <td class="money">$125,000</td>
+          <td class="money">$175,000</td>
+          <td class="money">$250,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="context-box avoid-break">
+    <h3>Why this is still conservative</h3>
+    <p>For this case, the model uses only a <strong>0.25%</strong> effect on a <strong>$50M</strong> revenue base, which equals <strong>$125,000</strong> per year. That is a modest assumption for a business where points, mix, margin, and spending decisions are closely tied together and where a slow answer can delay the right move.</p>
+  </div>
+
+  <div class="footer"><strong>Vena Solutions</strong><span>Standard Nutrition executive business case · 2026</span></div>
+</div>
+
+<div class="page">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-pill">Vena</span>
+      <span class="brand-tag">Standard Nutrition executive business case</span>
+    </div>
+    <span class="page-num">Page 3 of 3</span>
+  </div>
+
+  <div class="section-head"><span class="section-num">4</span><span class="section-title">Financial view</span></div>
+  <div class="subhead">The fee is fixed. The real question is how much value the business is likely to get back from it.</div>
+
+  <div class="value-table avoid-break">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 28%;">Scenario</th>
+          <th style="width: 20%;">Annual value</th>
+          <th style="width: 18%;">Payback period</th>
+          <th style="width: 34%;">What is included</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Direct savings only</strong></td>
+          <td class="money">$53,900</td>
+          <td class="money">8.1 months</td>
+          <td>Only the direct time savings and the current outside Power BI spend</td>
+        </tr>
+        <tr>
+          <td><strong>Base case</strong></td>
+          <td class="money">$143,900</td>
+          <td class="money">3.0 months</td>
+          <td>Direct savings plus better and faster operating decisions</td>
+        </tr>
+        <tr>
+          <td><strong>Base case with modest forecast and margin impact</strong></td>
+          <td class="money">$268,900</td>
+          <td class="money">1.6 months</td>
+          <td>Base case plus a 0.25% effect on a $50M revenue base</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="split avoid-break">
+    <div class="panel">
+      <h3>Why this case is believable</h3>
+      <ul>
+        <li>You said accuracy is the key approval metric.</li>
+        <li>You also said faster answers on hiring or expansion would be an easy ROI story.</li>
+        <li>Kelsie called out the manual work around GL detail, payroll, and broken links.</li>
+        <li>The current budget process still takes about two months and relies on too much manual work.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>What the owner really needs to believe</h3>
+      <ul>
+        <li>This is not about making finance more comfortable.</li>
+        <li>This is about better budget confidence and better decision support for the operating companies.</li>
+        <li>Putting the 15 core budget owners in the system now gives you a cleaner process right away, not just better reporting later.</li>
+        <li>Waiting likely means another cycle on the same fragile process.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-head"><span class="section-num">5</span><span class="section-title">Why this makes sense</span></div>
+  <div class="single-card avoid-break">
+    <h3>Starting with the 15 core budget owners looks like the strongest place to begin.</h3>
+    <p><strong>$36,300 annual software fee</strong></p>
+    <ul>
+      <li>You get budgeting, reporting, drilldown, and supporting detail in one controlled system from the start.</li>
+      <li>The direct savings already make the spend reasonable on their own.</li>
+      <li>Once faster answers and better operating decisions are added, the case becomes much stronger.</li>
+      <li>Once even a modest improvement in catching forecast and margin issues earlier is added, the return becomes more meaningful again.</li>
+      <li>This gives you a cleaner process now while still leaving room to expand later if you want to go broader.</li>
+    </ul>
+  </div>
+
+  <section class="bottom-line avoid-break">
+    <div class="small">Final recommendation</div>
+    <h2>This looks like a strong case to move forward.</h2>
+    <p>If the goal is to improve accuracy, tighten drilldown, speed up decision support, and give the business a more reliable budgeting process, starting with the 15 core budget owners in Vena looks like the most practical way to do it. The direct value is already there. The bigger upside comes from what the team can do once it has faster answers and a cleaner way to manage the story behind the numbers.</p>
+  </section>
+
+  <div class="footer"><strong>Vena Solutions</strong><span>Standard Nutrition executive business case · 2026</span></div>
+</div>
+
+</body>
+</html>
